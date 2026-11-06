@@ -1,7 +1,7 @@
 ![Meme Current — Catch the internet’s best](assets/meme-current-cover.png)
 
 # Meme Current
-Private meme discovery and publishing workspace for X, Facebook Pages, and Reddit.
+Private workspace for discovering memes, downloading image files, and publishing photos to X, Facebook Pages, and Reddit.
 
 ## Implemented
 - Reddit hot image post discovery; X recent image search; connected Facebook Page photo discovery.
@@ -9,11 +9,11 @@ Private meme discovery and publishing workspace for X, Facebook Pages, and Reddi
 - Manual HTTPS source/image imports; exact image URL deduplication.
 - Persistent R2 review queue, captions, permission confirmation, archive and delivery history.
 - Download and cache supported platform image files, capped at 8 MB.
-- Manual publish: X caption + original source link; Facebook photo + caption; Reddit image link post.
+- Publish downloaded JPG and PNG files as photo posts on X and Facebook Pages and as image posts on Reddit.
 - Server-only credentials, authenticated APIs, origin checks, conditional writes, duplicate-delivery protection.
 
 ## Configure private server environment variables
-- `X_ACCESS_TOKEN`: user-context OAuth bearer token with search/read and write permissions.
+- `X_ACCESS_TOKEN`: user-context OAuth bearer token with search/read access, `tweet.write`, and `media.write`.
 - `REDDIT_ACCESS_TOKEN`: OAuth token with read and submit scopes.
 - `REDDIT_USER_AGENT`: registered application user agent.
 - `FACEBOOK_PAGE_TOKEN`: Page token with read engagement and manage posts permissions.
@@ -23,7 +23,7 @@ Private meme discovery and publishing workspace for X, Facebook Pages, and Reddi
 Set values using Sites environment settings and redeploy. Never commit credentials. Presence of credentials is not proof of valid permissions. Provider errors are surfaced without echoing secrets.
 
 ## Scope and limitations
-No automatic OAuth setup or token refresh. No unattended scans or scheduled posting. X publishes links, not native image attachments. Reddit publishes link posts, not native image gallery posts; subreddit-specific flair requirements may prevent submission. Facebook discovery reads only the connected Page. No live platform requests can be tested until accounts are configured. Momentum is a heuristic, not measured growth; engagement counts are snapshots. Deduplication uses exact image URLs, not perceptual hashing. Remote images may expire. Delivery errors require checking the destination before retrying, to avoid duplicate posts. Keep this Site owner-private: records and credentials are shared within this workspace.
+No automatic OAuth setup or token refresh. No unattended scans or scheduled posting. Photo uploads accept JPG and PNG from supported source hosts. The file limits are 5 MB for X, 4 MB for Facebook Pages, and 8 MB for Reddit in this app. Subreddit rules can require flair or block image posts. Reddit image submissions may need time to appear. Facebook discovery reads only the connected Page. No live platform requests can be tested until accounts are configured. Momentum is a heuristic, not measured growth; engagement counts are snapshots. Deduplication uses exact image URLs, not perceptual hashing. Cached files remain available if a source image expires. Upload failures can be retried. If post delivery is uncertain, check the destination before submitting again. Keep this Site owner-private: records and credentials are shared within this workspace.
 
 ## Development
 `node scripts/check.mjs` runs mock-backed API tests without contacting platforms.
