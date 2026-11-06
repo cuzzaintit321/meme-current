@@ -1,3 +1,5 @@
+![Meme Current — Catch the internet’s best](assets/meme-current-cover.png)
+
 # Meme Current
 Private meme discovery and publishing workspace for X, Facebook Pages, and Reddit.
 
